@@ -51,24 +51,16 @@ void CanSend(uint8_t *TxData){
 }
 
 //function to send state of switches on CAN, for debugging!
-void CAN_switch_state(uint8_t values){
-	uint8_t TxData1[5];
-	uint8_t TxData2[5];
-
-	if(can_select == 0){
-		TxData1[0] = 11;
-		for(int i = 1; i < 5;i++){
-			TxData1[i] = check_bit(Default_Switch_State,i-1);
-		}
-		CanSend(TxData1);
+void CAN_switch_state(){
+	if(ID == 1){
+		TxData[0] = Default_Switch_State;
+		TxHeader.Identifier = 29;
+	}else if(ID == 2){
+		TxData[0] = Default_Switch_State;
+		TxHeader.Identifier = 30;
 	}
-	if(can_select == 1){
-		TxData2[0] = 12;
-		for(int i = 1; i < 5;i++){
-			TxData2[i] = check_bit(Default_Switch_State,i+3);
-		}
-		CanSend(TxData2);
-	}
+	CanSend(TxData);
+	TxHeader.Identifier = CAN_ID;
 }
 
 void switch_on_off(GPIO_TypeDef *port, uint16_t pin, uint8_t state){

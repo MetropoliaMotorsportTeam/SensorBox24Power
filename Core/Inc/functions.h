@@ -20,7 +20,7 @@ uint16_t Current_Sense_Raw_to_mA(uint16_t raw);
 void decode();
 uint8_t check_bit(uint8_t byte, uint8_t bitn);
 uint8_t set_bit(uint8_t byte, uint8_t pos, uint8_t new_bit);
-void CAN_switch_state(uint8_t values);
+void CAN_switch_state();
 void Over_current(uint8_t output_pin);
 void Warning_current(uint8_t output_pin);
 void Under_current(uint8_t output_pin);
