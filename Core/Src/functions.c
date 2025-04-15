@@ -217,3 +217,33 @@ uint16_t Current_Sense_Raw_to_mA(uint16_t raw){
 	return current;
 }
 
+float total_As = 0.0;
+
+
+void as_counter(){
+
+	float dt = 0.1;
+	float total_current = 0.0;
+
+	for (int i = 0; i < 7; i++){
+
+		outputs[i].As_counter += outputs[i].actual_current * dt;
+		total_As += outputs[i].actual_current * dt;
+		total_current += outputs[i].actual_current;
+
+		TxHeader.Identifier = 0x00;
+		TxData[0] = outputs[i].actual_current;
+		TxData[1] = outputs[i].As_counter;
+		TxData[2] = i;
+
+		CanSend(TxData);
+
+	}
+
+	TxHeader.Identifier = 0x01;
+	TxData[0] = total_current;
+	TxData[1] = total_As;
+
+	CanSend(TxData);
+
+}

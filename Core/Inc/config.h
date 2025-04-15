@@ -42,6 +42,7 @@ typedef struct{
 	uint16_t raw_current;
 	uint16_t Current_Sense[I_AVERAGE];
 	uint8_t state;
+	uint16_t As_counter;
 }Outputs;
 
 extern Outputs outputs[8];

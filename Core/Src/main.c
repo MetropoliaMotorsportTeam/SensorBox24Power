@@ -194,6 +194,7 @@ int main(void)
 	  if(millis % 10 == 0){
 
 		  Current_Sense_read();
+		  as_counter();
 	  }
 	  //check_warnings();
 	  //if receives message to change pwm then set_pwm(duty cycle)
