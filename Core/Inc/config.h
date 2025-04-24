@@ -10,20 +10,21 @@
 #define INC_CONFIG_H_
 
 
-#define ID 2 //1 for front, 2 for back
+#define ID 3 //1 for front, 2 for back
 
-#define I_AVERAGE 32
+#define I_AVERAGE 64
 
 #define NC 0
 #define BRAKE_LIGHT 1
 #define BRAKE_PRESSURE_SENSOR 2
 #define FAN 3
-#define PUMP 4
+#define PUMP1 4
 #define BUZZER 5
 #define TSAL 6
 #define TSAL_RED 7
 #define INVERTERS 8
-#define IMU 9
+#define PUMP2 9
+#define ECU 10
 
 void Config_Setup(void);
 void Config_1(void);
@@ -39,7 +40,7 @@ typedef struct{
 	uint16_t physical_pin;
 	uint8_t pin;
 	uint16_t actual_current;
-	uint16_t raw_current;
+	uint32_t raw_current;
 	uint16_t Current_Sense[I_AVERAGE];
 	uint8_t state;
 }Outputs;

@@ -93,6 +93,16 @@ void Under_current(uint8_t output_pin){
 	CanSend(TxData);
 }
 
+void Send_current(uint8_t output_pin, uint16_t current){
+	uint8_t cur1 = current/100;
+	uint8_t cur2 = current%100;
+	TxData[0] = 16;
+	TxData[1] = output_pin;
+	TxData[2] = cur1;
+	TxData[3] = cur2;
+	CanSend(TxData);
+}
+
 void decode(){
 	
 	switch (RxMessage.Bytes[0]) //PWM or switch output
@@ -104,7 +114,9 @@ void decode(){
 		case 2:
 				Default_Switch_State = set_bit(Default_Switch_State,RxMessage.Bytes[1],RxMessage.Bytes[2]);
 				switch_output();
+				break;
 		default:
+
 			break;
 
 	}
@@ -117,10 +129,12 @@ void Current_Sense_process(){
 	for(int i = 0; i < 8; i++){
 		outputs[i].raw_current = outputs[i].Current_Sense[0];
 		for(int z = 1; z < I_AVERAGE; z++){
-			outputs[i].raw_current = (outputs[i].raw_current + outputs[i].Current_Sense[0])/2;
-
+				outputs[i].raw_current = outputs[i].raw_current + outputs[i].Current_Sense[z];
 		}
-		outputs[i].actual_current = Current_Sense_Raw_to_mA(outputs[i].raw_current);
+		outputs[i].actual_current = Current_Sense_Raw_to_mA(outputs[i].raw_current/I_AVERAGE);
+		if ((outputs[i].device != NC) && (outputs[i].actual_current != 0)){
+			Send_current(i, outputs[i].actual_current);
+		}
 	}
 	check_warnings();
 }
@@ -152,6 +166,7 @@ void ConfigureCurrentSense(uint8_t SEL0, uint8_t SEL1){
 
 void ReadADCValues(uint16_t *adc1_values, uint16_t *adc2_values){
 	for(int i = 0; i < I_AVERAGE; i++){
+		for(volatile int d = 0; d<5000; ++d);
 		if(HAL_ADC_Start(&hadc1)!=HAL_OK){Error_Handler();}
 		if(HAL_ADC_Start(&hadc2)!=HAL_OK){Error_Handler();}
 		if(HAL_ADC_PollForConversion(&hadc1,100)!=HAL_OK){Error_Handler();}
@@ -167,21 +182,29 @@ void Current_Sense_read(){
 	for(int x = 0;x < 5; x++){
 		switch(x){
 		case 0:
-			ConfigureCurrentSense(0, 0);
-			ReadADCValues(outputs[0].Current_Sense, outputs[4].Current_Sense);
-			break;
+			if((outputs[0].device != NC) || (outputs[4].device != NC)){
+				ConfigureCurrentSense(0, 0);
+				ReadADCValues(outputs[0].Current_Sense, outputs[4].Current_Sense);
+				break;
+			}
 		case 1:
-			ConfigureCurrentSense(0, 1);
-			ReadADCValues(outputs[1].Current_Sense, outputs[5].Current_Sense);
-			break;
+			if((outputs[1].device != NC) || (outputs[5].device != NC)){
+				ConfigureCurrentSense(0, 1);
+				ReadADCValues(outputs[1].Current_Sense, outputs[5].Current_Sense);
+				break;
+			}
 		case 2:
-			ConfigureCurrentSense(1, 0);
-			ReadADCValues(outputs[2].Current_Sense, outputs[6].Current_Sense);
-			break;
+			if((outputs[2].device != NC) || (outputs[6].device != NC)){
+				ConfigureCurrentSense(1, 0);
+				ReadADCValues(outputs[2].Current_Sense, outputs[6].Current_Sense);
+				break;
+			}
 		case 3:
-			ConfigureCurrentSense(1, 1);
-			ReadADCValues(outputs[3].Current_Sense, outputs[7].Current_Sense);
-			break;
+			if((outputs[3].device != NC) || (outputs[7].device != NC)){
+				ConfigureCurrentSense(1, 1);
+				ReadADCValues(outputs[3].Current_Sense, outputs[7].Current_Sense);
+				break;
+			}
 		}
 	}
 	Current_Sense_process();
@@ -208,10 +231,10 @@ uint8_t set_bit(uint8_t byte, uint8_t pos, uint8_t new_bit){
 
 uint16_t Current_Sense_Raw_to_mA(uint16_t raw){
 	//4095 is the max, depending on resistors we will find the current values		3.3 V == 4,95 A
-	uint32_t max_mA = 4950;
+	//uint32_t max_mA = 4950;
 	uint16_t current = 0;
-
-	current = raw*max_mA / 4095;
+	uint16_t cal = 12;
+	current = raw * 150 * 33 * cal / (4095 * 10);
 	//current = raw*3300 / 4095;
 
 	return current;

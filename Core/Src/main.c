@@ -31,7 +31,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define I_AVERAGE  32
+#define I_AVERAGE  64
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -44,6 +44,8 @@ ADC_HandleTypeDef hadc1;
 ADC_HandleTypeDef hadc2;
 
 FDCAN_HandleTypeDef hfdcan1;
+
+
 
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
@@ -98,6 +100,8 @@ uint16_t CAN_interval;
 FDCAN_TxHeaderTypeDef TxHeader;
 FDCAN_RxHeaderTypeDef RxHeader;
 CAN_Message RxMessage;
+
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -179,6 +183,31 @@ int main(void)
 
   HAL_Delay(2000);
   HAL_GPIO_WritePin(GPIOA,LED2_Pin,1);
+
+
+  //uint8_t TxData[8];
+
+  //TxHeader.Identifier = 0x12; // Example standard identifier
+  //     TxHeader.IdType = FDCAN_STANDARD_ID;
+  //     TxHeader.TxFrameType = FDCAN_DATA_FRAME;
+  //     TxHeader.DataLength = FDCAN_DLC_BYTES_8;
+  //     TxHeader.ErrorStateIndicator = FDCAN_ESI_ACTIVE;
+  //     TxHeader.BitRateSwitch = FDCAN_BRS_OFF;
+  //     TxHeader.FDFormat = FDCAN_CLASSIC_CAN;
+  //     TxHeader.TxEventFifoControl = FDCAN_NO_TX_EVENTS;
+  //     TxHeader.MessageMarker = 0;
+
+       // Example data
+       //TxData[0] = 0xDE;
+       //TxData[1] = 0xAD;
+       //TxData[2] = 0xBE;
+       //TxData[3] = 0xEF;
+       //TxData[4] = 0x01;
+       //TxData[5] = 0x02;
+       //TxData[6] = 0x03;
+       //TxData[7] = 0x04;
+
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -193,6 +222,9 @@ int main(void)
 		 __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1,PWM_speed[1]);
 	  if(millis % 10 == 0){
 
+//		  if (HAL_FDCAN_AddMessageToTxFifoQ(&hfdcan1, &TxHeader, TxData) != HAL_OK) {
+//		            Error_Handler();
+//		  }
 		  Current_Sense_read();
 	  }
 	  //check_warnings();
@@ -330,7 +362,7 @@ static void MX_ADC1_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN ADC1_Init 2 */
-  //if (HAL_ADCEx_Calibration_Start(&hadc1, ADC_DIFFERENTIAL_ENDED)!= HAL_OK){ Error_Handler(); }
+  if (HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED)!= HAL_OK){ Error_Handler(); }
   /* USER CODE END ADC1_Init 2 */
 
 }
@@ -389,7 +421,7 @@ static void MX_ADC2_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN ADC2_Init 2 */
-  //if (HAL_ADCEx_Calibration_Start(&hadc2, ADC_DIFFERENTIAL_ENDED)!= HAL_OK){ Error_Handler(); }
+  if (HAL_ADCEx_Calibration_Start(&hadc2, ADC_SINGLE_ENDED)!= HAL_OK){ Error_Handler(); }
   /* USER CODE END ADC2_Init 2 */
 
 }
@@ -710,7 +742,7 @@ static void MX_TIM6_Init(void)
   htim6.Init.Prescaler = 0;
   htim6.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim6.Init.Period = 65535;
-  htim6.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  htim6.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
   if (HAL_TIM_Base_Init(&htim6) != HAL_OK)
   {
     Error_Handler();
