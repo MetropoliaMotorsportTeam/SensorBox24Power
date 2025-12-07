@@ -238,7 +238,7 @@ void TIM3_IRQHandler(void)
   /* USER CODE BEGIN TIM3_IRQn 0 */
 	millis++;
 	if((millis % 200) == 0){
-		CAN_switch_state();
+		CANSwitchDeviceState();
 	}
   /* USER CODE END TIM3_IRQn 0 */
   HAL_TIM_IRQHandler(&htim3);

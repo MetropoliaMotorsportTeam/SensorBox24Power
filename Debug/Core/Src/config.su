@@ -1,4 +1,4 @@
-../Core/Src/config.c:6:6:Config_Setup	8	static
-../Core/Src/config.c:22:6:Config_1	1256	static
-../Core/Src/config.c:58:6:Config_2	1256	static
-../Core/Src/config.c:94:6:Config_3	1256	static
+../Core/Src/config.c:14:6:Config_Setup	8	static
+../Core/Src/config.c:30:6:Config_1	1256	static
+../Core/Src/config.c:70:6:Config_2	1256	static
+../Core/Src/config.c:110:6:Config_3	1256	static

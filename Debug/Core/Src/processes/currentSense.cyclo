@@ -1,0 +1,4 @@
+../Core/Src/processes/currentSense.c:15:6:ReadADCValues	9
+../Core/Src/processes/currentSense.c:30:6:CurrentSenseProcess	5
+../Core/Src/processes/currentSense.c:45:6:CurrentSenseRead	14
+../Core/Src/processes/currentSense.c:78:10:CurrentSenseRawTomA	1

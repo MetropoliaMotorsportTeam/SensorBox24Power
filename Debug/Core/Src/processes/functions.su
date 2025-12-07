@@ -1,0 +1,10 @@
+../Core/Src/processes/functions.c:21:6:CANSwitchDeviceState	8	static
+../Core/Src/processes/functions.c:32:6:OverCurrent	16	static
+../Core/Src/processes/functions.c:38:6:WarningCurrent	16	static
+../Core/Src/processes/functions.c:44:6:UnderCurrent	16	static
+../Core/Src/processes/functions.c:50:6:SendCurrent	24	static
+../Core/Src/processes/functions.c:60:6:DecodeCANMessage	8	static
+../Core/Src/processes/functions.c:80:6:CheckWarnings	16	static
+../Core/Src/processes/functions.c:100:6:ConfigureCurrentSense	16	static
+../Core/Src/processes/functions.c:107:9:CheckBit	24	static
+../Core/Src/processes/functions.c:116:9:SetBit	24	static

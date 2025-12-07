@@ -1,0 +1,5 @@
+../Core/Src/peripherals/fdcan.c:34:6:MX_FDCAN1_Init	2
+../Core/Src/peripherals/fdcan.c:79:6:HAL_FDCAN_MspInit	3
+../Core/Src/peripherals/fdcan.c:123:6:HAL_FDCAN_MspDeInit	2
+../Core/Src/peripherals/fdcan.c:149:6:HAL_FDCAN_RxFifo0Callback	5
+../Core/Src/peripherals/fdcan.c:173:6:CANSend	3

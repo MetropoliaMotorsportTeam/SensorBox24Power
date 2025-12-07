@@ -1,0 +1,2 @@
+../Core/Src/processes/deviceControl.c:18:6:SwitchOnOff	1
+../Core/Src/processes/deviceControl.c:22:6:SwitchOutput	2

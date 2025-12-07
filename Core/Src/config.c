@@ -3,6 +3,14 @@
 #include "commands.h"
 #include "config.h"
 
+
+uint8_t CAN_ID;
+uint16_t CAN_interval;
+
+
+uint8_t CAN_over_currernt;
+uint8_t CAN_under_currernt;
+uint8_t CAN_warning_currernt;
 void Config_Setup(void)
 {
 #if ID == 1
@@ -23,6 +31,10 @@ void Config_1(void){
 
 	CAN_ID = 21;
 	CAN_interval = 1000; //in ms
+
+	CAN_over_currernt = 25;
+	CAN_under_currernt = 23;
+	CAN_warning_currernt = 24;
 
 	//definition of Outputs
 	Outputs OUT0_1 = {NC, 2050, 1900, 0, GPIOB, IN0_Pin, OUT0_1_pin};
@@ -51,7 +63,7 @@ void Config_1(void){
 	PWM_width[0] = 10;
 	PWM_width[1] = 10;
 
-	switch_output();
+	SwitchOutput();
 
 }
 
@@ -59,6 +71,10 @@ void Config_2(void){
 
 	CAN_ID = 22;
 	CAN_interval = 1000; //in ms
+
+	CAN_over_currernt = 28;
+	CAN_under_currernt = 27;
+	CAN_warning_currernt = 26;
 
 	//definition of Outputs
 	Outputs OUT0_1 = {TSAL, 2050, 1900, 0, GPIOB, IN0_Pin, OUT0_1_pin};
@@ -87,7 +103,7 @@ void Config_2(void){
 	PWM_width[0] = 10;
 	PWM_width[1] = 10;
 
-	switch_output();
+	SwitchOutput();
 
 }
 
@@ -97,7 +113,7 @@ void Config_3(void){
 	CAN_interval = 1000; //in ms
 
 	//definition of Outputs
-	Outputs OUT0_1 = {FAN, 2050, 1900, 0, GPIOB, IN0_Pin, OUT0_1_pin};
+	Outputs OUT0_1 = {FAN, 2500, 1900, 0, GPIOB, IN0_Pin, OUT0_1_pin};
 	Outputs OUT1_1 = {NC, 2050, 1900, 0, GPIOA, IN1_Pin, OUT1_1_pin};
 	Outputs OUT2_1 = {NC, 2050, 1900, 0, GPIOA, IN2_Pin, OUT2_1_pin};
 	Outputs OUT3_1 = {NC, 2050, 1900, 0, GPIOA, IN3_Pin, OUT3_1_pin};
@@ -123,7 +139,7 @@ void Config_3(void){
 	PWM_width[0] = 10;
 	PWM_width[1] = 10;
 
-	switch_output();
+	SwitchOutput();
 }
 
 

@@ -30,8 +30,8 @@ Core/Src/config.o: ../Core/Src/config.c ../Core/Inc/main.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_pwr_ex.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h \
- ../Core/Inc/config.h ../Core/Inc/functions.h ../Core/Inc/commands.h \
- ../Core/Inc/functions.h ../Core/Inc/commands.h ../Core/Inc/config.h
+ ../Core/Inc/config.h ../Core/Inc/processes/functions.h \
+ ../Core/Inc/commands.h ../Core/Inc/commands.h ../Core/Inc/config.h
 ../Core/Inc/main.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:
 ../Core/Inc/stm32g4xx_hal_conf.h:
@@ -65,8 +65,7 @@ Core/Src/config.o: ../Core/Src/config.c ../Core/Inc/main.h \
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h:
 ../Core/Inc/config.h:
-../Core/Inc/functions.h:
+../Core/Inc/processes/functions.h:
 ../Core/Inc/commands.h:
-../Core/Inc/functions.h:
 ../Core/Inc/commands.h:
 ../Core/Inc/config.h:

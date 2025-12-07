@@ -47,6 +47,9 @@ typedef struct{
 
 extern Outputs outputs[8];
 
+extern uint8_t CAN_over_currernt;
+extern uint8_t CAN_under_currernt;
+extern uint8_t CAN_warning_currernt;
 
 enum pins{
 	OUT0_1_pin, OUT1_1_pin, OUT2_1_pin, OUT3_1_pin,
