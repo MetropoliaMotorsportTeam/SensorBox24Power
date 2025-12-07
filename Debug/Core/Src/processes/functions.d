@@ -1,6 +1,6 @@
 Core/Src/processes/functions.o: ../Core/Src/processes/functions.c \
  ../Core/Inc/main.h ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h \
- ../Core/Inc/stm32g4xx_hal_conf.h \
+ ../Core/Inc/sys/stm32g4xx_hal_conf.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h \
  ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h \
@@ -35,7 +35,7 @@ Core/Src/processes/functions.o: ../Core/Src/processes/functions.c \
  ../Core/Inc/peripherals/fdcan.h
 ../Core/Inc/main.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h:
-../Core/Inc/stm32g4xx_hal_conf.h:
+../Core/Inc/sys/stm32g4xx_hal_conf.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h:
 ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h:
 ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h:

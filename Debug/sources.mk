@@ -25,6 +25,7 @@ SUBDIRS := \
 Core/Src \
 Core/Src/peripherals \
 Core/Src/processes \
+Core/Src/sys \
 Core/Startup \
 Drivers/STM32G4xx_HAL_Driver/Src \
 
