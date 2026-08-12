@@ -52,6 +52,9 @@ default.size.stdout \
 OBJDUMP_LIST += \
 SensorBox24Power.list \
 
+OBJCOPY_BIN += \
+SensorBox24Power.bin \
+
 
 # All Target
 all: main-build
@@ -75,12 +78,17 @@ SensorBox24Power.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS
 	@echo 'Finished building: $@'
 	@echo ' '
 
+SensorBox24Power.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "SensorBox24Power.bin"
+	@echo 'Finished building: $@'
+	@echo ' '
+
 # Other Targets
 clean:
-	-$(RM) SensorBox24Power.elf SensorBox24Power.list SensorBox24Power.map default.size.stdout
+	-$(RM) SensorBox24Power.bin SensorBox24Power.elf SensorBox24Power.list SensorBox24Power.map default.size.stdout
 	-@echo ' '
 
-secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
+secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_BIN)
 
 fail-specified-linker-script-missing:
 	@echo 'Error: Cannot find the specified linker script. Check the linker settings in the build configuration.'

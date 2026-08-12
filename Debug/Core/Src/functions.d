@@ -32,8 +32,8 @@ Core/Src/functions.o: ../Core/Src/functions.c ../Core/Inc/bootloader.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h \
  ../Core/Inc/config.h \
  ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h \
- ../Core/Inc/main.h ../Core/Inc/commands.h ../Core/Inc/config.h \
- ../Core/Inc/functions.h
+ ../Core/Inc/main.h ../Core/Inc/config.h ../Core/Inc/functions.h \
+ ../Core/Inc/commands.h ../Core/Inc/functions.h
 ../Core/Inc/bootloader.h:
 ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h:
 ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:
@@ -69,6 +69,7 @@ Core/Src/functions.o: ../Core/Src/functions.c ../Core/Inc/bootloader.h \
 ../Core/Inc/config.h:
 ../Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h:
 ../Core/Inc/main.h:
-../Core/Inc/commands.h:
 ../Core/Inc/config.h:
+../Core/Inc/functions.h:
+../Core/Inc/commands.h:
 ../Core/Inc/functions.h:
