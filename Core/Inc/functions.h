@@ -29,10 +29,12 @@ void switch_on_off(GPIO_TypeDef *port, uint16_t pin, uint8_t state);
 void CAN_Send(uint8_t *TxData, uint32_t id);
 void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs);
 
-typedef struct{
-	uint8_t DLC;
-	uint8_t Bytes[8];
-}CAN_Message;
+typedef struct
+{
+  uint16_t Id;
+  uint8_t DLC;
+  uint8_t Bytes[8];
+} CAN_Message;
 
 extern CAN_Message RxMessage;
 
