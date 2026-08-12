@@ -7,6 +7,10 @@
 #include "stm32g4xx_hal_fdcan.h"
 #include "stm32g4xx_hal_rcc.h"
 
+#define KiB(n) ((uint64_t)n << 10)
+#define MiB(n) ((uint64_t)n << 20)
+#define GiB(n) ((uint64_t)n << 30)
+
 #define BOOT_ADDR FLASH_BASE
 #define BOOT_SIZE KiB(32)
 #define APP_SIZE KiB(96)
