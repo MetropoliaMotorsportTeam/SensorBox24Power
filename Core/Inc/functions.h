@@ -8,10 +8,14 @@
 #ifndef INC_FUNCTIONS_H_
 #define INC_FUNCTIONS_H_
 
+#include "stm32g431xx.h"
+#include "stm32g4xx.h"
+#include "stm32g4xx_hal.h"
+#include "stm32g4xx_hal_fdcan.h"
 #include <stdbool.h>
 
 void ConfigureCurrentSense(uint8_t sel0, uint8_t sel1);
-void ReadADCValues(uint16_t *adc1_values, uint16_t *adc2_values);
+void ReadADCValues(uint16_t* adc1_values, uint16_t* adc2_values);
 void Current_Sense_read();
 void Current_Sense_process();
 void check_warnings();
@@ -25,9 +29,9 @@ void Over_current(uint8_t output_pin);
 void Warning_current(uint8_t output_pin);
 void Under_current(uint8_t output_pin);
 
-void switch_on_off(GPIO_TypeDef *port, uint16_t pin, uint8_t state);
-void CAN_Send(uint8_t *TxData, uint32_t id);
-void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs);
+void switch_on_off(GPIO_TypeDef* port, uint16_t pin, uint8_t state);
+uint8_t Can_Send(uint8_t* TxData, uint32_t Id);
+void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef* hfdcan, uint32_t RxFifo0ITs);
 
 typedef struct
 {
@@ -37,6 +41,5 @@ typedef struct
 } CAN_Message;
 
 extern CAN_Message RxMessage;
-
 
 #endif /* INC_FUNCTIONS_H_ */

@@ -5,12 +5,12 @@
  *      Author: csort
  */
 
-
 #ifndef INC_CONFIG_H_
 #define INC_CONFIG_H_
 
-
-#define ID 3 //1 for front, 2 for back
+#include "stm32g431xx.h"
+#include <stdint.h>
+#define ID 2 // 1 for front, 2 for back
 
 #define I_AVERAGE 64
 
@@ -31,27 +31,33 @@ void Config_1(void);
 void Config_2(void);
 void Config_3(void);
 
-typedef struct{
-	uint16_t device;
-	uint16_t Over_Current;
-	uint16_t Warning_Current;
-	uint16_t Under_Current;
-	GPIO_TypeDef *port;
-	uint16_t physical_pin;
-	uint8_t pin;
-	uint16_t actual_current;
-	uint32_t raw_current;
-	uint16_t Current_Sense[I_AVERAGE];
-	uint8_t state;
-}Outputs;
+typedef struct
+{
+  uint16_t device;
+  uint16_t Over_Current;
+  uint16_t Warning_Current;
+  uint16_t Under_Current;
+  GPIO_TypeDef* port;
+  uint16_t physical_pin;
+  uint8_t pin;
+  uint16_t actual_current;
+  uint32_t raw_current;
+  uint16_t Current_Sense[I_AVERAGE];
+  uint8_t state;
+} Outputs;
 
 extern Outputs outputs[8];
 
-
-enum pins{
-	OUT0_1_pin, OUT1_1_pin, OUT2_1_pin, OUT3_1_pin,
-	OUT0_2_pin, OUT1_2_pin, OUT2_2_pin, OUT3_2_pin
+enum pins
+{
+  OUT0_1_pin,
+  OUT1_1_pin,
+  OUT2_1_pin,
+  OUT3_1_pin,
+  OUT0_2_pin,
+  OUT1_2_pin,
+  OUT2_2_pin,
+  OUT3_2_pin
 };
-
 
 #endif /* INC_CONFIG_H_ */

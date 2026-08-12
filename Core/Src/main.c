@@ -21,6 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "functions.h"
 
 /* USER CODE END Includes */
 
@@ -228,14 +229,9 @@ int main(void)
     __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, PWM_speed[1]);
     if (millis % 10 == 0)
     {
-
-      //		  if (HAL_FDCAN_AddMessageToTxFifoQ(&hfdcan1, &TxHeader, TxData) != HAL_OK) {
-      //		            Error_Handler();
-      //		  }
       Current_Sense_read();
+      check_warnings();
     }
-    // check_warnings();
-    // if receives message to change pwm then set_pwm(duty cycle)
   }
   /* USER CODE END 3 */
 }
