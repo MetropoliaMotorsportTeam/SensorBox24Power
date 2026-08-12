@@ -166,6 +166,13 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_GPIO_WritePin(GPIOA, LED2_Pin, 0);
 
+  HAL_TIM_PWM_Init(&htim1);
+  HAL_TIM_PWM_Init(&htim2);
+  HAL_TIM_Base_Start_IT(&htim3);
+
+  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+
   set_pwm_duty_cycle(&htim1);
   set_pwm_duty_cycle(&htim2);
 
@@ -183,9 +190,6 @@ int main(void)
   }
 
   HAL_Delay(2000);
-
-  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
   HAL_GPIO_WritePin(GPIOA, LED2_Pin, 1);
 
   // uint8_t TxData[8];
@@ -219,12 +223,19 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, PWM_speed[0]);
+
+    __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, PWM_speed[1]);
     if (millis % 10 == 0)
     {
+
+      //		  if (HAL_FDCAN_AddMessageToTxFifoQ(&hfdcan1, &TxHeader, TxData) != HAL_OK) {
+      //		            Error_Handler();
+      //		  }
       Current_Sense_read();
     }
-    check_warnings();
-    // if receives message to change pwm then set_pwm_duty_cycle
+    // check_warnings();
+    // if receives message to change pwm then set_pwm(duty cycle)
   }
   /* USER CODE END 3 */
 }
